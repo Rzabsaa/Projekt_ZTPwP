@@ -54,4 +54,3 @@ Wykres wygenerowany z tego pomiaru zapisał się w `wyniki/wykres_gil.png`.
 - **Błąd serializacji (`pickle`) przy procesach:** Na początku próbowałem wrzucić do `ProcessPoolExecutor` bezpośrednio obiekt generatora, ale wywalało błąd, bo procesy muszą sobie przesłać dane przez `pickle`, a generatora nie da się zserializować. Rozwiązałem to pisząc własny `PorcjujacyIterator`, który najpierw zbiera dane w zwykłe listy (paczki).
 - **Zapętlanie procesów na Windowsie:** Przy odpalaniu `ProcessPoolExecutor` bez `if __name__ == "__main__":` skrypt próbował w kółko importować sam siebie i tworzyć nowe procesy (mechanizm `spawn` na Windowsie). Dodanie strażnika w `main.py` rozwiązało sprawę.
 - **Polskie znaki w generowanych mailach:** Przy losowaniu nazwisk z polskimi znakami (np. *Woźniak*) walidator odrzucał poprawne rekordy, bo regex sprawdzał tylko znaki ASCII. Dodałem `str.maketrans` w generatorze, żeby zamieniał ogonki na zwykłe litery przy tworzeniu adresu e-mail.
-EOF
